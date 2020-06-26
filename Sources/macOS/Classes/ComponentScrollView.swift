@@ -44,7 +44,6 @@ open class ComponentScrollView: NSScrollView {
   /// Override the setter and getter for the vertical scroller to remove it permanently.
   open override var verticalScroller: NSScroller? {
     get { return nil }
-    set {}
   }
 
   /// Initializes and returns a newly allocated NSView object with a specified frame rectangle.

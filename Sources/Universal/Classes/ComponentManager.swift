@@ -148,7 +148,7 @@ public class ComponentManager {
   /// - parameter completion: A completion closure that is executed in the main queue.
   public func delete(item: Item, component: Component, withAnimation animation: Animation = .automatic, completion: Completion) {
     Dispatch.main {
-      guard let index = component.model.items.index(where: { $0 == item }) else {
+      guard let index = component.model.items.firstIndex(where: { $0 == item }) else {
         completion?()
         return
       }
@@ -411,7 +411,7 @@ public class ComponentManager {
   /// - parameter json:      A JSON dictionary.
   /// - parameter component: The component that should be mutated.
   /// - parameter animation:  A Animation that is used when performing the mutation (only works for Listable objects)
-  @available(*, deprecated: 7.0, message: "Deprecated in favor for reloadIfNeeded with items")
+  @available(*, deprecated, message: "Deprecated in favor for reloadIfNeeded with items")
   public func reloadIfNeeded(json: [String: Any], component: Component, withAnimation animation: Animation = .automatic, completion: Completion = nil) {
     Dispatch.interactive {
       let jsonEncoder = JSONEncoder()

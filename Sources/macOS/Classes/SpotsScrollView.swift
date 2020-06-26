@@ -84,10 +84,7 @@ open class SpotsScrollView: NSScrollView {
     if !animated {
       CATransaction.begin()
       CATransaction.setDisableActions(true)
-
-      defer {
-        CATransaction.commit()
-      }
+      CATransaction.commit()
     }
 
     var yOffsetOfCurrentSubview: CGFloat = CGFloat(self.inset?.top ?? 0.0)

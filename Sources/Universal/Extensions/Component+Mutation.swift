@@ -104,7 +104,7 @@ public extension Component {
   /// - parameter animation:        A Animation that is used when performing the mutation.
   /// - parameter updateDataSource: A closure to update your data source.
   /// - parameter completion:       A completion closure that runs when your updates are done.
-  public func reloadIfNeeded(_ changes: Changes, withAnimation animation: Animation = .automatic, updateDataSource: () -> Void, completion: Completion) {
+  func reloadIfNeeded(_ changes: Changes, withAnimation animation: Animation = .automatic, updateDataSource: () -> Void, completion: Completion) {
     manager.reloadIfNeeded(with: changes, component: self, withAnimation: animation, updateDataSource: updateDataSource, completion: completion)
   }
 
@@ -113,7 +113,7 @@ public extension Component {
   /// - parameter items:      A collection of Items
   /// - parameter animation:  The animation that should be used (only works for Listable objects)
   /// - parameter completion: A completion closure that is performed when all mutations are performed
-  public func reloadIfNeeded(_ items: [Item], withAnimation animation: Animation = .automatic, completion: Completion = nil) {
+  func reloadIfNeeded(_ items: [Item], withAnimation animation: Animation = .automatic, completion: Completion = nil) {
     manager.reloadIfNeeded(items: items, component: self, withAnimation: animation, completion: completion)
   }
 
@@ -121,7 +121,7 @@ public extension Component {
   ///
   /// - parameter json:      A JSON dictionary
   /// - parameter animation:  A Animation that is used when performing the mutation (only works for Listable objects)
-  public func reloadIfNeeded(_ json: [String: Any], withAnimation animation: Animation = .automatic) {
+  func reloadIfNeeded(_ json: [String: Any], withAnimation animation: Animation = .automatic) {
     manager.reloadIfNeeded(json: json, component: self, withAnimation: animation)
   }
 }

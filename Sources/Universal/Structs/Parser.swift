@@ -8,7 +8,7 @@ public struct Parser {
   /// - parameter json: A JSON dictionary of components and items.
   ///
   /// - returns: A collection of components
-  @available(*, deprecated: 7.0, message: "Deprecated in favor for parseComponents with data")
+  @available(*, deprecated, message: "Deprecated in favor for parseComponents with data")
   public static func parseComponents(json: [String: Any],
                                      key: String = "components",
                                      configuration: Configuration = .shared) -> [Component] {
@@ -77,7 +77,7 @@ public struct Parser {
   public static func parseComponentModels(data: Data,
                                           key: String = "components") -> [ComponentModel] {
     let jsonDecoder = JSONDecoder()
-    guard var payload = try? jsonDecoder.decode([String: [ComponentModel]].self, from: data) else {
+    guard let payload = try? jsonDecoder.decode([String: [ComponentModel]].self, from: data) else {
       return []
     }
 

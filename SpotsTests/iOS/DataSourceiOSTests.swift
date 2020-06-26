@@ -22,7 +22,7 @@ class DataSourceiOSTests: XCTestCase {
       return
     }
 
-    var itemCell1: CustomListCell? = component.componentDataSource!.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as? CustomListCell
+    let itemCell1: CustomListCell? = component.componentDataSource!.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as? CustomListCell
     let itemCell2: CustomListCell? = component.componentDataSource!.tableView(tableView, cellForRowAt: IndexPath(row: 1, section: 0)) as? CustomListCell
 
     XCTAssertNotNil(itemCell1)

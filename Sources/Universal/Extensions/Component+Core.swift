@@ -7,7 +7,7 @@
 // MARK: - Component extension
 public extension Component {
   /// A computed CGFloat of the total height of all items inside of a component
-  public var computedHeight: CGFloat {
+  var computedHeight: CGFloat {
     guard model.layout.dynamicHeight == true else {
       return self.view.frame.height
     }
@@ -77,7 +77,7 @@ public extension Component {
     }
   }
 
-  public func prepareItems(purgeCachedViews: Bool = false) {
+  func prepareItems(purgeCachedViews: Bool = false) {
     manager.itemManager.prepareItems(component: self, purgeCachedViews: purgeCachedViews)
   }
 
@@ -86,11 +86,11 @@ public extension Component {
   /// - parameter index: The index of the UI component
   ///
   /// - returns: An optional view of inferred type
-  public func ui<T: View>(at index: Int) -> T? {
+  func ui<T: View>(at index: Int) -> T? {
     return userInterface?.view(at: index)
   }
 
-  public func itemModel<T>(at index: Int) -> T? {
+  func itemModel<T>(at index: Int) -> T? {
     return item(at: index)?.model as? T
   }
 
@@ -99,7 +99,7 @@ public extension Component {
   /// - parameter index: The index of the item that should be resolved.
   ///
   /// - returns: An optional Item that corresponds to the index.
-  public func item(at index: Int) -> Item? {
+  func item(at index: Int) -> Item? {
     guard index < model.items.count && index > -1 else {
       return nil
     }
@@ -112,7 +112,7 @@ public extension Component {
   /// - parameter indexPath: The index path of the item that should be resolved.
   ///
   /// - returns: An optional Item that corresponds to the index path.
-  public func item(at indexPath: IndexPath) -> Item? {
+  func item(at indexPath: IndexPath) -> Item? {
     #if os(OSX)
       return item(at: indexPath.item)
     #else
@@ -123,7 +123,7 @@ public extension Component {
   /// Update the height of the UI ComponentModel
   ///
   /// - parameter completion: A completion closure that will be run in the main queue when the size has been updated.
-  public func updateHeight(_ completion: Completion = nil) {
+  func updateHeight(_ completion: Completion = nil) {
     Dispatch.interactive { [weak self] in
       guard let `self` = self else {
         completion?()
@@ -160,7 +160,7 @@ public extension Component {
   }
 
   /// Refresh indexes for all items to ensure that the indexes are unique and in ascending order.
-  public func refreshIndexes(completion: Completion = nil) {
+  func refreshIndexes(completion: Completion = nil) {
     Dispatch.interactive { [weak self] in
       guard let `self` = self else {
         return
@@ -181,7 +181,7 @@ public extension Component {
   }
 
   /// Caches the current state of the component
-  public func cache() {
+  func cache() {
     stateCache?.save(model)
   }
 
@@ -203,7 +203,7 @@ public extension Component {
   /// - parameter index: The index of the item that needs resolving.
   ///
   /// - returns: A string identifier for the view, defaults to the `defaultIdentifier` on the component.
-  public func identifier(at index: Int) -> String {
+  func identifier(at index: Int) -> String {
     if let item = item(at: index), configuration.views.storage[item.kind] != nil {
       return item.kind
     } else {
@@ -215,7 +215,7 @@ public extension Component {
   ///
   /// - Parameter includeElement: A predicate closure to determine the offset of the item.
   /// - Returns: The offset based of the model data.
-  public func itemOffset(_ includeElement: (Item) -> Bool) -> CGFloat {
+  func itemOffset(_ includeElement: (Item) -> Bool) -> CGFloat {
     guard let item = model.items.filter(includeElement).first else {
       return 0.0
     }
@@ -233,7 +233,7 @@ public extension Component {
   /// Update height and refresh indexes for the component.
   ///
   /// - parameter completion: A completion closure that will be run when the computations are complete.
-  public func updateHeightAndIndexes(completion: Completion = nil) {
+  func updateHeightAndIndexes(completion: Completion = nil) {
     updateHeight { [weak self] in
       guard let `self` = self else {
         return
@@ -247,7 +247,7 @@ public extension Component {
   ///
   /// - Parameter indexPath: The index path of the item that should be resolved.
   /// - Returns: A `CGSize` based of the `Item`'s width and height.
-  public func sizeForItem(at indexPath: IndexPath) -> CGSize {
+  func sizeForItem(at indexPath: IndexPath) -> CGSize {
     return manager.itemManager.sizeForItem(at: indexPath, in: self)
   }
 }

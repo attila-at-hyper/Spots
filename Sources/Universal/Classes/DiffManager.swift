@@ -36,7 +36,7 @@ class DiffManager {
 
       let itemDiff = diff(oldModel: oldItem, newModel: newItems[index])
 
-      if let index = newItems.index(where: { $0.compareItemIncludingIndex(oldItem) }), oldItem.index != index {
+      if let index = newItems.firstIndex(where: { $0.compareItemIncludingIndex(oldItem) }), oldItem.index != index {
         changes.append(.move(oldItem.index, index))
       } else {
         changes.append(itemDiff)
@@ -64,7 +64,7 @@ class DiffManager {
       let oldItem = oldItems[index]
       let itemDiff = diff(oldModel: oldItem, newModel: newItem)
 
-      if let index = newItems.index(where: { $0.compareItemIncludingIndex(oldItem) }), oldItem.index != index {
+      if let index = newItems.firstIndex(where: { $0.compareItemIncludingIndex(oldItem) }), oldItem.index != index {
         changes.append(.move(oldItem.index, index))
       } else {
         changes.append(itemDiff)
@@ -87,7 +87,7 @@ class DiffManager {
       let oldItem = oldItems[index]
       let itemDiff = diff(oldModel: oldItem, newModel: newItem)
 
-      if let index = newItems.index(where: { $0.compareItemIncludingIndex(oldItem) }), oldItem.index != index {
+      if let index = newItems.firstIndex(where: { $0.compareItemIncludingIndex(oldItem) }), oldItem.index != index {
         changes.append(.move(oldItem.index, index))
       } else {
         changes.append(itemDiff)

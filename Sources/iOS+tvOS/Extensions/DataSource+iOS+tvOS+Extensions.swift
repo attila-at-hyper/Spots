@@ -7,7 +7,6 @@ extension DataSource: UICollectionViewDataSource {
   /// - parameter section:        An index number identifying a section in collectionView. This index value is 0-based.
   ///
   /// - returns: The number of rows in section.
-  @available(iOS 6.0, *)
   public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     guard component?.model.layout.infiniteScrolling == true && numberOfItems >= buffer else {
       return numberOfItems

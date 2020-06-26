@@ -106,11 +106,11 @@ extension KeyedDecodingContainer {
   }
 
   func decodeJsonDictionaryIfPresent(forKey key: KeyedDecodingContainer.Key) -> [String: Any]? {
-    if let dictionary = try? decodeIfPresent([String: Any].self, forKey: key) {
+    if let dictionary = ((try? decodeIfPresent([String: Any].self, forKey: key)) as [String: Any]??) {
       return dictionary
     }
 
-    guard let decodedData = try? decodeIfPresent(Data.self, forKey: key), let data = decodedData else {
+    guard let decodedData = ((try? decodeIfPresent(Data.self, forKey: key)) as Data??), let data = decodedData else {
       return nil
     }
 

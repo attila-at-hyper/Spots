@@ -20,7 +20,7 @@ class UIViewControllerExtensionsTests: XCTestCase {
 
   func testShouldAutorotateOnChildController() {
     let parentController = UIViewController()
-    parentController.addChildViewController(controller)
+    parentController.addChild(controller)
     XCTAssertEqual(controller.components_shouldAutorotate(), true)
   }
 }

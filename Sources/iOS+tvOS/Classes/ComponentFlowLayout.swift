@@ -49,7 +49,7 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
     super.prepare()
 
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
-    var previousItem: UICollectionViewLayoutAttributes? = nil
+    var previousItem: UICollectionViewLayoutAttributes?
 
     for index in 0..<(collectionView?.numberOfItems(inSection: 0) ?? 0) {
       if let itemAttribute = super.layoutAttributesForItem(at: IndexPath(item: index, section: 0))?.copy() as? UICollectionViewLayoutAttributes {
@@ -80,6 +80,8 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
           }
         case .vertical:
           itemAttribute.frame.origin.y += component.headerHeight
+        @unknown default:
+          fatalError()
         }
 
         layoutAttributes.append(itemAttribute)
@@ -139,6 +141,8 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
     case .vertical:
       contentSize.width = component.view.frame.width - component.view.contentInset.left - component.view.contentInset.right
       contentSize.height = collectionViewContentSize.height
+    @unknown default:
+      fatalError()
     }
 
     component.model.size = contentSize
@@ -155,6 +159,8 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
       return layoutAttributes
     case .vertical:
       return layoutAttributes?.filter({ $0.frame.intersects(rect) })
+    @unknown default:
+      fatalError()
     }
   }
 
@@ -180,7 +186,7 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
     }
 
     guard indexPathsToAnimate.contains(itemIndexPath) else {
-      if let index = indexPathsToMove.index(of: itemIndexPath) {
+      if let index = indexPathsToMove.firstIndex(of: itemIndexPath) {
         indexPathsToMove.remove(at: index)
         attributes.alpha = 1.0
         return attributes
@@ -188,7 +194,7 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
       return nil
     }
 
-    if let index = indexPathsToAnimate.index(of: itemIndexPath) {
+    if let index = indexPathsToAnimate.firstIndex(of: itemIndexPath) {
       indexPathsToAnimate.remove(at: index)
     }
 
@@ -207,7 +213,7 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
     }
 
     guard indexPathsToAnimate.contains(itemIndexPath) else {
-      if let index = indexPathsToMove.index(of: itemIndexPath) {
+      if let index = indexPathsToMove.firstIndex(of: itemIndexPath) {
         indexPathsToMove.remove(at: index)
         attributes.alpha = 1.0
         return attributes
@@ -215,7 +221,7 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
       return nil
     }
 
-    if let index = indexPathsToAnimate.index(of: itemIndexPath) {
+    if let index = indexPathsToAnimate.firstIndex(of: itemIndexPath) {
       indexPathsToAnimate.remove(at: index)
     }
 
@@ -373,6 +379,8 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
       #else
         return newBounds.size.height >= contentSize.height
       #endif
+    @unknown default:
+      fatalError()
     }
   }
 
@@ -401,7 +409,7 @@ open class ComponentFlowLayout: UICollectionViewFlowLayout {
                                                                 collectionView: collectionView,
                                                                 delegate: delegate)
       let point = CGPoint(x: targetContentOffset.x, y: collectionView.contentOffset.y)
-      let options: UIViewAnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction]
+      let options: UIView.AnimationOptions = [.beginFromCurrentState, .allowAnimatedContent, .allowUserInteraction]
       UIView.animate(withDuration: 0.25, delay: 0, options: options, animations: {
         collectionView.contentOffset = point
         // This is called in order to invoke the delegate methods attached

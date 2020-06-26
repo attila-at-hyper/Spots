@@ -78,9 +78,9 @@ open class SpotsScrollView: UIScrollView, UIGestureRecognizerDelegate {
   ///
   /// - parameter subview: - parameter subview: The view to add to the view as a subview..
   func didAddSubviewToContainer(_ subview: UIView) {
-    subview.autoresizingMask = UIViewAutoresizing()
+    subview.autoresizingMask = UIView.AutoresizingMask()
 
-    guard componentsView.subviews.index(of: subview) != nil else {
+    guard componentsView.subviews.firstIndex(of: subview) != nil else {
       return
     }
 
@@ -123,12 +123,12 @@ open class SpotsScrollView: UIScrollView, UIGestureRecognizerDelegate {
   ///
   /// - parameter subview: - parameter subview: The subview that will be removed.
   open override func willRemoveSubview(_ subview: UIView) {
-    if let index = subviewsInLayoutOrder.index(where: { $0 == subview }) {
+    if let index = subviewsInLayoutOrder.firstIndex(where: { $0 == subview }) {
       subviewsInLayoutOrder.remove(at: index)
     }
 
     for observer in observers.filter({ $0.view === subview }) {
-      if let index = observers.index(where: { $0 == observer }) {
+      if let index = observers.firstIndex(where: { $0 == observer }) {
         observers.remove(at: index)
       }
     }

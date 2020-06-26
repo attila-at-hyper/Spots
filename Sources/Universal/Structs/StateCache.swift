@@ -16,7 +16,7 @@ public final class StateCache {
 
   /// Remove state cache for all controllers and components.
   public static func removeAll() {
-    try? storage?.removeAll()
+    ((try? storage?.removeAll()) as ()??)
   }
 
   /// A unique identifer string for the StateCache
@@ -44,14 +44,14 @@ public final class StateCache {
   /// - parameter json: A JSON object
   public func save<T: Codable>(_ object: T) {
     let expiry = Expiry.date(Date().addingTimeInterval(60 * 60 * 24 * 3))
-    try? storage?.setObject(object, forKey: key, expiry: expiry)
+    ((try? storage?.setObject(object, forKey: key, expiry: expiry)) as ()??)
   }
 
   /// Load JSON from cache
   ///
   /// - returns: A Swift dictionary
   public func load<T: Codable>() -> T? {
-    guard let object = try? storage?.object(ofType: T.self, forKey: key) else {
+    guard let object = ((try? storage?.object(ofType: T.self, forKey: key)) as T??) else {
       return nil
     }
     return object
@@ -59,7 +59,7 @@ public final class StateCache {
 
   /// Clear the current StateCache
   public func clear(completion: (() -> Void)? = nil) {
-    try? storage?.removeAll()
+    ((try? storage?.removeAll()) as ()??)
     completion?()
   }
 

@@ -158,14 +158,14 @@ public class SpotsControllerManager {
     if let preparedComponent = preparedComponent {
       component = preparedComponent
 
-      defer {
+        do {
         completion?()
       }
     } else {
       component = Component(model: newComponentModels[index], configuration: controller.configuration)
       component.view.frame = oldComponent.view.frame
 
-      defer {
+        do {
         controller.setupComponent(at: index, component: component)
         component.afterUpdate()
       }
@@ -340,7 +340,7 @@ public class SpotsControllerManager {
       }
 
       for removedComponent in controller.components where removedComponent.view.superview == nil {
-        if let index = controller.components.index(where: { removedComponent.view.isEqual($0.view) }) {
+        if let index = controller.components.firstIndex(where: { removedComponent.view.isEqual($0.view) }) {
           controller.components.remove(at: index)
         }
       }

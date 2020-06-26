@@ -97,7 +97,7 @@ extension Delegate: NSTableViewDelegate {
       return nil
     }
 
-    var resolvedView: View? = nil
+    var resolvedView: View?
     if let type = viewContainer.type {
       switch type {
       case .regular:

@@ -68,7 +68,7 @@ public struct Registry {
     guard let item = storage[identifier] else { return nil }
 
     let registryType: RegistryType
-    var view: View? = nil
+    var view: View?
 
     switch item {
     case .classType(let classType):

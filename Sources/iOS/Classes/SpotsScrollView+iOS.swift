@@ -4,7 +4,7 @@ import UIKit
 extension SpotsScrollView {
   /// Layout views in linear order based of view index in `subviewsInLayoutOrder`
   func layoutViews() {
-    guard let superview = superview else {
+    guard superview != nil else {
       return
     }
 

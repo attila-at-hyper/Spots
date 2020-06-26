@@ -5,7 +5,7 @@ import UIKit
 public class Component: NSObject, ComponentHorizontallyScrollable {
   /// A configuration closure that can be used to pinpoint configuration of
   /// views used inside of the component.
-  open static var configure: ((Component) -> Void)?
+  public static var configure: ((Component) -> Void)?
   /// A focus delegate that returns which component is focused.
   weak public var focusDelegate: ComponentFocusDelegate?
   #if os(tvOS)
@@ -380,12 +380,12 @@ public class Component: NSObject, ComponentHorizontallyScrollable {
   ///
   /// - parameter predicate: A predicate closure to determine which item to scroll to.
   public func scrollTo(item predicate: ((Item) -> Bool), animated: Bool = true) {
-    guard let index = model.items.index(where: predicate) else {
+    guard let index = model.items.firstIndex(where: predicate) else {
       return
     }
 
     if let collectionView = collectionView {
-      let scrollPosition: UICollectionViewScrollPosition
+      let scrollPosition: UICollectionView.ScrollPosition
 
       if model.interaction.scrollDirection == .horizontal {
         scrollPosition = .centeredHorizontally

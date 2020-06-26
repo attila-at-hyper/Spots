@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/hyperoslo/Spots.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/hyperoslo'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '12.0'
   s.osx.deployment_target = '10.11'
   s.tvos.deployment_target = '9.2'
 
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.osx.source_files = 'Sources/{Universal,macOS}/**/*'
   s.tvos.source_files = 'Sources/{Universal,tvOS,iOS+tvOS}/**/*'
   
-  s.dependency 'Cache', '~> 4.0'
+  s.dependency 'Cache', '~> 5.3.0'
   s.framework  = "Foundation"
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.1' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '5.0' }
 end

@@ -4,8 +4,6 @@
   import Foundation
 #endif
 
-import Cache
-
 // MARK: - SpotsProtocol extension
 public extension SpotsController {
   /// Resolve UI component based on a predicate.

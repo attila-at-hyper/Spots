@@ -4,8 +4,6 @@
   import UIKit
 #endif
 
-import Cache
-
 public protocol SpotsProtocol: class {
   /// A closure that is called when the controller is reloaded with components
   static var componentsDidReloadComponentModels: ((_ controller: SpotsController) -> Void)? { get set }
